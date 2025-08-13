@@ -2,230 +2,218 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <title>OwenN_026 — Official</title>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <style>
-  :root{
-    --bg1:#0f1724;
-    --bg2:#0b1220;
+  :root {
+    --bg1: #0f1724;
+    --bg2: #0b1220;
     --accent1: #6ee7b7;
     --accent2: #7c5cff;
     --glass-opacity: 0.18;
     --glass-blur: 14px;
     --radius: 18px;
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   }
-  html,body{height:100%}
-  body{
-    margin:0;
-    min-height:100%;
-    background:linear-gradient(120deg,var(--bg1),var(--bg2));
+  html, body {height: 100%;}
+  body {
+    margin: 0;
+    background: linear-gradient(120deg, var(--bg1), var(--bg2));
     color: #e6eef8;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:28px;
-    box-sizing:border-box;
-    overflow:auto;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+
+    /* Geen selectie mogelijk */
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
   }
 
-  /* animated liquid blobs */
-  .blobs{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:0;
+  /* Blobs background */
+  .blobs {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
   }
-  .blob{
-    position:absolute;
-    filter:blur(40px) saturate(120%);
-    opacity:0.85;
-    mix-blend-mode:screen;
-    transform:translate3d(0,0,0);
+  .blob {
+    position: absolute;
+    filter: blur(40px) saturate(120%);
+    opacity: 0.85;
+    mix-blend-mode: screen;
     animation: float 10s ease-in-out infinite;
   }
-  .blob.b1{width:520px;height:520px;background:radial-gradient(circle at 20% 30%, rgba(124,92,255,0.95), rgba(124,92,255,0.55) 40%, transparent 60%); left:-120px; top:-80px; animation-delay:0s;}
-  .blob.b2{width:420px;height:420px;background:radial-gradient(circle at 70% 70%, rgba(110,231,183,0.9), rgba(110,231,183,0.45) 40%, transparent 60%); right:-80px; bottom:-120px; animation-delay:2s;}
-  .blob.b3{width:360px;height:360px;background:radial-gradient(circle at 50% 50%, rgba(255,160,100,0.85), rgba(255,160,100,0.35) 40%, transparent 60%); left:40%; top:10%; animation-delay:4s;}
-  @keyframes float { 0%{transform:translateY(0) scale(1)} 50%{transform:translateY(-18px) scale(1.02)} 100%{transform:translateY(0) scale(1)} }
-
-  /* layout card */
-  .card{
-    position:relative;
-    z-index:2;
-    width:100%;
-    max-width:980px;
-    display:grid;
-    grid-template-columns: 320px 1fr;
-    gap:26px;
-    align-items:start;
+  .blob.b1 {width: 400px; height: 400px; background: radial-gradient(circle at 20% 30%, rgba(124,92,255,0.95), rgba(124,92,255,0.55) 40%, transparent 60%); left: -100px; top: -60px;}
+  .blob.b2 {width: 320px; height: 320px; background: radial-gradient(circle at 70% 70%, rgba(110,231,183,0.9), rgba(110,231,183,0.45) 40%, transparent 60%); right: -60px; bottom: -100px;}
+  .blob.b3 {width: 280px; height: 280px; background: radial-gradient(circle at 50% 50%, rgba(255,160,100,0.85), rgba(255,160,100,0.35) 40%, transparent 60%); left: 40%; top: 10%;}
+  @keyframes float {
+    0% {transform: translateY(0) scale(1);}
+    50% {transform: translateY(-12px) scale(1.02);}
+    100% {transform: translateY(0) scale(1);}
   }
 
-  /* glass panel */
-  .panel{
+  /* Card layout */
+  .card {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 980px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  /* Glass panel */
+  .panel {
     background: linear-gradient(180deg, rgba(255,255,255,var(--glass-opacity)), rgba(255,255,255,0.03));
-    border-radius:var(--radius);
-    padding:22px;
+    border-radius: var(--radius);
+    padding: 18px;
     backdrop-filter: blur(var(--glass-blur)) saturate(120%);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
-    border:1px solid rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.06);
     box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+    flex: 1;
+    min-width: 260px;
   }
 
-  /* left column */
-  .left{
-    display:flex;
-    flex-direction:column;
-    gap:18px;
+  /* Artist cover */
+  .cover {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.04);
   }
-  .cover{
-    width:100%;
-    aspect-ratio:1/1;
-    border-radius:14px;
-    overflow:hidden;
-    background:linear-gradient(180deg,#111820,#0c1116);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:rgba(255,255,255,0.12);
-    font-weight:700;
-    font-size:28px;
-    border:1px solid rgba(255,255,255,0.04);
-  }
-  .artist-title{
-    font-size:36px;
-    font-weight:800;
-    letter-spacing:-0.02em;
-    margin:0;
-  }
-  .meta{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-    color:rgba(230,238,248,0.82);
-  }
-  .bio{
-    font-size:14px;
-    line-height:1.45;
-    color:rgba(230,238,248,0.78);
-    margin-top:6px;
+  .cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none; /* Geen drag */
   }
 
-  /* actions */
-  .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
-  .btn{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding:10px 14px;
-    border-radius:12px;
-    font-weight:600;
-    font-size:14px;
-    text-decoration:none;
-    cursor:pointer;
-    border:1px solid rgba(255,255,255,0.06);
-    background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-    color:white;
-    box-shadow: 0 6px 18px rgba(2,6,23,0.5);
+  /* Text styles */
+  .artist-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 12px 0 6px;
   }
-  .btn.spotify{
+  .meta {
+    font-size: 0.9rem;
+    color: rgba(230,238,248,0.82);
+  }
+  .bio {
+    font-size: 0.85rem;
+    color: rgba(230,238,248,0.78);
+    margin-top: 8px;
+  }
+
+  /* Buttons */
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .btn {
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.06);
+    color: white;
+    background: rgba(255,255,255,0.05);
+    transition: transform 0.15s ease;
+  }
+  .btn:hover {
+    transform: scale(1.05);
+  }
+  .btn.spotify {
     background: linear-gradient(90deg, #1db954, #1ed760);
-    color:#02210a;
+    color: #02210a;
   }
-  .btn.secondary{ background:transparent; border:1px solid rgba(255,255,255,0.06); }
 
-  /* right column - contact card */
-  .contact{
-    display:flex;
-    flex-direction:column;
-    gap:14px;
+  /* Social icons */
+  .socials {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
   }
-  .contact .panel{ padding:18px; }
-  .contact label{ font-size:12px; color:rgba(230,238,248,0.7); }
-  .contact .email{
-    display:flex; align-items:center; justify-content:space-between;
-    background:rgba(0,0,0,0.15); padding:12px; border-radius:10px;
-    border:1px solid rgba(255,255,255,0.03);
-    font-weight:600; color:white;
+  .socials a {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.03);
+    color: inherit;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.03);
   }
-  .socials{display:flex;gap:10px}
-  .socials a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,0.03);text-decoration:none;color:inherit;border:1px solid rgba(255,255,255,0.03)}
-  .small{font-size:13px;color:rgba(230,238,248,0.7)}
 
-  /* responsive */
-  @media (max-width:880px){
-    .card{grid-template-columns:1fr; padding:0 6px}
-    .artist-title{font-size:30px}
-    .cover{aspect-ratio:3/2}
+  /* Responsive */
+  @media (max-width: 768px) {
+    body {
+      padding: 14px;
+    }
+    .card {
+      flex-direction: column;
+    }
+    .artist-title {
+      font-size: 1.6rem;
+    }
+    .cover {
+      aspect-ratio: 3 / 2;
+    }
   }
 </style>
 </head>
-<body>
-  <div class="blobs" aria-hidden="true">
+<body oncontextmenu="return false">
+  <div class="blobs">
     <div class="blob b1"></div>
     <div class="blob b2"></div>
     <div class="blob b3"></div>
   </div>
 
-  <main class="card" role="main" aria-label="Artiestpagina">
-    <!-- LEFT -->
-    <section class="panel left" aria-labelledby="artist-name">
-      <div class="cover" id="cover">
-        <!-- vervang met <img src="..."> als je een cover hebt -->
-        <img src="https://via.placeholder.com/1200x1200.png?text=Cover" alt="Cover art" style="width:100%;height:100%;object-fit:cover">
+  <main class="card">
+    <section class="panel">
+      <div class="cover">
+        <img src="https://via.placeholder.com/1200x1200.png?text=Cover" alt="Cover art" draggable="false">
       </div>
-
-      <div>
-        <h1 id="artist-name" class="artist-title">OwenN_026</h1>
-        <div class="meta">
-          <div class="small">Latest release: <strong>Shadows in the Dark 2.0</strong></div>
-          <p class="bio">Elektronische ambient / soundscape. Meer tracks & releases hier. Contact voor samenwerkingen: <strong>owen.nooy@icloud.com</strong></p>
-        </div>
-
-        <div class="actions" aria-hidden="false">
-          <a class="btn spotify" href="https://open.spotify.com/artist/YOUR_ARTIST_ID" target="_blank" rel="noopener">Open op Spotify</a>
-          <a class="btn secondary" href="https://open.spotify.com/track/YOUR_TRACK_ID" target="_blank" rel="noopener">Luister track</a>
-        </div>
+      <h1 class="artist-title">OwenN_026</h1>
+      <div class="meta">Laatste release: <strong>Shadows in the Dark 2.0</strong></div>
+      <p class="bio">Elektronische ambient / soundscape. Meer tracks & releases hier. Contact voor samenwerkingen: <strong>owen.nooy@icloud.com</strong></p>
+      <div class="actions">
+        <a class="btn spotify" href="https://open.spotify.com/artist/YOUR_ARTIST_ID" target="_blank">Open op Spotify</a>
+        <a class="btn" href="https://open.spotify.com/track/YOUR_TRACK_ID" target="_blank">Luister track</a>
       </div>
     </section>
 
-    <!-- RIGHT -->
-    <aside class="panel contact" aria-label="Contact & links">
-      <div>
-        <label>Email (zichtbaar voor Spotify verificatie)</label>
-        <div class="email">owen.nooy@icloud.com</div>
-      </div>
-
-      <div>
-        <label>Officiële links</label>
-        <div class="small" style="margin-top:6px">
-          <div><strong>Spotify:</strong> <a href="https://open.spotify.com/artist/YOUR_ARTIST_ID" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">open.spotify.com/artist/…</a></div>
-          <div><strong>FreshTunes:</strong> <a href="https://freshtunes.com/ft/music/persons/221281" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">freshtunes.com/ft/music/persons/221281</a></div>
-        </div>
-      </div>
-
-      <div>
-        <label>Socials</label>
-        <div class="socials" style="margin-top:8px">
-          <a href="https://instagram.com/YOUR_HANDLE" target="_blank" rel="noopener" title="Instagram">IG</a>
-          <a href="https://youtube.com/YOUR_CHANNEL" target="_blank" rel="noopener" title="YouTube">YT</a>
-          <a href="https://soundcloud.com/YOUR_HANDLE" target="_blank" rel="noopener" title="SoundCloud">SC</a>
-        </div>
-      </div>
-
-      <div style="margin-top:auto">
-        <label>Short press / bio</label>
-        <div class="small" style="margin-top:8px">OwenN_026 maakt ambient soundscapes en elektronische stijlen. Contact & releases: <strong>owen.nooy@icloud.com</strong></div>
+    <aside class="panel">
+      <label>Email</label>
+      <div style="margin-bottom: 10px; font-weight: 600;">owen.nooy@icloud.com</div>
+      <label>Officiële links</label>
+      <p><a href="https://open.spotify.com/artist/YOUR_ARTIST_ID" target="_blank">Spotify</a> | <a href="https://freshtunes.com/ft/music/persons/221281" target="_blank">FreshTunes</a></p>
+      <label>Socials</label>
+      <div class="socials">
+        <a href="https://instagram.com/YOUR_HANDLE" target="_blank">IG</a>
+        <a href="https://youtube.com/YOUR_CHANNEL" target="_blank">YT</a>
+        <a href="https://soundcloud.com/YOUR_HANDLE" target="_blank">SC</a>
       </div>
     </aside>
   </main>
 
-<!-- small accessibility footer -->
-<footer style="position:fixed;left:12px;bottom:12px;z-index:3;color:rgba(230,238,248,0.5);font-size:12px">
-  Demo • Pas tekst en links aan voordat je indient bij Spotify
-</footer>
+<script>
+  // Zorgt dat niks kan gesleept worden
+  document.querySelectorAll('*').forEach(el => {
+    el.setAttribute('draggable', 'false');
+  });
+</script>
 </body>
 </html>
